@@ -1,0 +1,13 @@
+messages:
+  prefix: "&b&lCyber&f&lMissions &8»"
+  no-permission: "&cInsufficient Permissions!"
+  reloading: "&7Reloading..."
+  reloaded: "&aReloaded!"
+  help:
+    - "&8&m―――――&8<&b&l Cyber&f&lMissions &8>&8&m―――――"
+    - "&8➼ &7/cms help &fSee the help menu."
+    - "&8➼ &7/cms reload &fReload the plugin."
+
+
+  invalid-id: "&cInvalid ID. Please use a valid ID from your missions config."
+  mission-progress: "&a%id%&7: &f%name% &8- &7%description% (%amount%x)"

@@ -1,0 +1,7 @@
+config:
+
+  random-missions: true
+
+  enable-difficulty: true
+
+  auto-start: false
