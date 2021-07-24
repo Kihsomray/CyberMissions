@@ -1,0 +1,60 @@
+config:
+
+  # should missions randomly generate?
+  random-missions:
+    enabled: true
+
+    # should each player generate a random mission? if not, everyone will
+    # have the same mission(s).
+    per-player: false
+
+    # when missions randomly generate, do you want duplicates of missions?
+    duplicate-missions: false
+
+    # should each mission have a difficulty (set by you)?
+    # random missions must be enabled for this to work.
+    difficulty:
+      enabled: true
+
+      difficulties:
+        easy:
+          missions:
+            - 1
+            - 2
+            - 3
+
+          max-enabled: 2
+
+        medium:
+          missions:
+            - 4
+            - 5
+            - 6
+
+          max-enabled: 1
+
+        hard:
+          missions:
+            - 7
+            - 8
+            - 9
+
+          max-enabled: -1
+
+
+  # should missions automatically start?
+  auto-start: true
+
+  # what is the maximum amount of missions that can be enabled by a user at once?
+  # use -1 if there should be no limit. if auto-start is enabled, all missions
+  # can be progressed through by the player. random missions will be chosen
+  max-missions-enabled: -1
+
+  # should this be the maximum number of missions that generate per difficulty?
+  # if false, the player wont be allowed more than the quantity in max-missions-enabled
+  # across all missions.
+  max-missions-per-difficulty: false
+
+
+  # do not touch
+  config-version: 1.0.0

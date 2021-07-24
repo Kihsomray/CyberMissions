@@ -16,4 +16,21 @@ public class DifficultyObject {
         this.missions = missions;
     }
 
+    public String getDifficulty() {
+        return difficulty;
+    }
+    public ArrayList<String> getMissions() {
+        return missions;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+    public void setMissions(ArrayList<String> missions) {
+        this.missions = missions;
+    }
+
+    public void addMission(String missionID) {
+        missions.add(missionID);
+    }
 }

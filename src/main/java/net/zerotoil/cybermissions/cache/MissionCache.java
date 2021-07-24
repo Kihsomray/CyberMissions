@@ -1,5 +1,6 @@
 package net.zerotoil.cybermissions.cache;
 
+import net.zerotoil.cybermissions.CyberMissions;
 import net.zerotoil.cybermissions.objects.ConditionObject;
 import net.zerotoil.cybermissions.objects.DifficultyObject;
 import net.zerotoil.cybermissions.objects.MissionObject;
@@ -12,44 +13,60 @@ import java.util.List;
 public class MissionCache {
 
     // all missions saved from config
-    public static HashMap<String, MissionObject> storedMissions = new HashMap<>();
+    private HashMap<String, MissionObject> storedMissions = new HashMap<>();
 
     // all mission ids stored under their difficulty
-    public static HashMap<String, DifficultyObject> storedDifficulties = new HashMap<>();
+    private HashMap<String, DifficultyObject> storedDifficulties = new HashMap<>();
 
     // all mission conditions
-    public static List<String> storedConditions = new ArrayList<>();
+    private List<String> storedConditions = new ArrayList<>();
 
-    //
+    private CyberMissions main;
 
-    public static void initializeMissions() {
+    public HashMap<String, MissionObject> getStoredMissions() {
+        return this.storedMissions;
+    }
+    public HashMap<String, DifficultyObject> getStoredDifficulties() {
+        return this.storedDifficulties;
+    }
+    public List<String> getStoredConditions() {
+        return this.storedConditions;
+    }
 
-        for (String i : FileUtils.getConfigFile("missions").getConfigurationSection("missions").getKeys(false)) {
-            storedMissions.put(i, new MissionObject(i, FileUtils.getMissionString(i + ".display-name"),
-                    FileUtils.getMissionString(i + ".description"), FileUtils.getMissionString(i + "difficulty")));
+
+    public MissionCache(CyberMissions main) {
+        this.main = main;
+
+        if (!storedMissions.isEmpty()) storedMissions.clear();
+        if (!storedConditions.isEmpty()) storedConditions.clear();
+
+        // loops through all mission IDs
+        for (String i : main.getFileUtils().getConfigFile("missions").getConfigurationSection("missions").getKeys(false)) {
+
+            // stores a new mission object
+            storedMissions.put(i, new MissionObject(main, i, main.getFileUtils().getMissionString(i + ".display-name"),
+                    main.getFileUtils().getMissionString(i + ".description"), main.getFileUtils().getMissionString(i + "difficulty")));
 
             // stores all conditions in the Condition Object inside of the MissionObject
-            for (String c : FileUtils.getConfigFile("missions").getConfigurationSection("missions." + i + ".conditions").getKeys(false)) {
-                storedMissions.get(i).getConditions().put(c, new ConditionObject(c, FileUtils.getConfigFile("missions")
-                        .getDouble("missions." + i + ".conditions." + c + ".amount"), FileUtils.getConfigFile("missions")
-                        .getStringList("missions." + i + ".conditions." + c + ".type")));
-                if (!storedConditions.contains(c))
-                    storedConditions.add(c);
+            for (String a : main.getFileUtils().getConfigFile("missions").getConfigurationSection("missions." + i + ".conditions").getKeys(false)) {
+
+                storedMissions.get(i).getConditions().put(a, new ConditionObject(a, main.getFileUtils().getConfigFile("missions")
+                        .getDouble("missions." + i + ".conditions." + a + ".amount"), main.getFileUtils().getConfigFile("missions")
+                        .getStringList("missions." + i + ".conditions." + a + ".type")));
+
+                if (!storedConditions.contains(a)) storedConditions.add(a);
             }
 
             // is there a start message?
-            if (FileUtils.getConfigFile("missions").isSet("missions." + i + ".start-message"))
-                storedMissions.get(i).setStartMessage(FileUtils.getMissionString(i + ".start-message"));
+            if (main.getFileUtils().getConfigFile("missions").isSet("missions." + i + ".start-message"))
+                storedMissions.get(i).setStartMessage(main.getFileUtils().getMissionString(i + ".start-message"));
 
             // is there a finish message?
-            if (FileUtils.getConfigFile("missions").isSet("missions." + i + ".finish-message"))
-                storedMissions.get(i).setFinishMessage(FileUtils.getMissionString(i + ".finish-message"));
+            if (main.getFileUtils().getConfigFile("missions").isSet("missions." + i + ".finish-message"))
+                storedMissions.get(i).setFinishMessage(main.getFileUtils().getMissionString(i + ".finish-message"));
 
 
         }
     }
-
-
-
 
 }

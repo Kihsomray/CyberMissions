@@ -11,7 +11,7 @@ public class FileObject {
 
     // ---- fields ----
 
-    private CyberMissions plugin;
+    private CyberMissions main;
     private File configFile;
     private FileConfiguration dataConfig;
     private String location;
@@ -21,8 +21,8 @@ public class FileObject {
     // ---- constructors ----
 
     // loads a new file
-    public FileObject(CyberMissions plugin, String location) {
-        this.plugin = plugin;
+    public FileObject(CyberMissions main, String location) {
+        this.main = main;
         this.location = location;
         this.name = location.replace(".yml", "");
         saveDefaultConfig();
@@ -30,7 +30,7 @@ public class FileObject {
 
     }
     private File getFile(){
-        return new File(CyberMissions.getInstance().getDataFolder(), location);
+        return new File(main.getDataFolder(), location);
     }
 
 
@@ -59,7 +59,7 @@ public class FileObject {
         if (configFile.exists()) {
             return;
         }
-        CyberMissions.getInstance().saveResource(location, false);
+        main.saveResource(location, false);
     }
 
 }

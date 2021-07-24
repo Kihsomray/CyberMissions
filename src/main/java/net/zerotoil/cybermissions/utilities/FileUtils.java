@@ -1,20 +1,26 @@
 package net.zerotoil.cybermissions.utilities;
 
+import net.zerotoil.cybermissions.CyberMissions;
 import net.zerotoil.cybermissions.cache.FileCache;
 import org.bukkit.configuration.Configuration;
 
 public class FileUtils {
 
-    public static Configuration getConfigFile(String file) {
-        return FileCache.storedFiles.get(file).getConfig();
+    private CyberMissions main;
+    public FileUtils(CyberMissions main) {
+        this.main = main;
     }
 
-    public static String getLangString(String path, boolean addPrefix) {
-        return MessageUtils.getColor(getConfigFile("lang").getString(path), addPrefix);
+    public Configuration getConfigFile(String file) {
+        return main.getFileCache().getStoredFiles().get(file).getConfig();
     }
 
-    public static String getMissionString(String missionPath) {
-        return FileCache.storedFiles.get("missions").getConfig().getString("mission." + missionPath);
+    public String getLangString(String path, boolean addPrefix) {
+        return main.getMessageUtils().getColor(getConfigFile("lang").getString(path), addPrefix);
+    }
+
+    public String getMissionString(String missionPath) {
+        return main.getFileCache().getStoredFiles().get("missions").getConfig().getString("mission." + missionPath);
     }
 
 }

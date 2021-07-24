@@ -1,0 +1,6 @@
+data: []
+  uuid:
+    mission-id:
+      event-id:
+        progress: (double)
+        completed: (boolean)

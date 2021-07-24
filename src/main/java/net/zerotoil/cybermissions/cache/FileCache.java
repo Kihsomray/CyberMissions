@@ -9,22 +9,29 @@ import java.util.HashMap;
 public class FileCache {
 
     // easy access hashmap of stored files
-    public static HashMap<String, FileObject> storedFiles = new HashMap<>();
+    private HashMap<String, FileObject> storedFiles = new HashMap<>();
+    private CyberMissions main;
 
-    public static void initializeFiles() {
+    public HashMap<String, FileObject> getStoredFiles() {
+        return this.storedFiles;
+    }
+
+    public FileCache(CyberMissions main) {
+
+        this.main = main;
 
         // clears stored files
         if(!storedFiles.isEmpty()) storedFiles.clear();
 
         // front-end files
-        storedFiles.put("config", new FileObject(CyberMissions.getInstance(), "config.yml"));
-        storedFiles.put("lang", new FileObject(CyberMissions.getInstance(), "lang.yml"));
-        storedFiles.put("missions", new FileObject(CyberMissions.getInstance(), "missions.yml"));
-        storedFiles.put("gui", new FileObject(CyberMissions.getInstance(), "gui.yml"));
+        storedFiles.put("config", new FileObject(this.main, "config.yml"));
+        storedFiles.put("lang", new FileObject(this.main, "lang.yml"));
+        storedFiles.put("missions", new FileObject(this.main, "missions.yml"));
+        storedFiles.put("gui", new FileObject(this.main, "gui.yml"));
 
         // back-end files
-        storedFiles.put("playerData", new FileObject(CyberMissions.getInstance(), "data/player-data.yml"));
-        storedFiles.put("missionData", new FileObject(CyberMissions.getInstance(), "data/mission-data.yml"));
+        storedFiles.put("playerData", new FileObject(this.main, "data/player-data.yml"));
+        storedFiles.put("missionData", new FileObject(this.main, "data/mission-data.yml"));
 
     }
 

@@ -1,5 +1,6 @@
 package net.zerotoil.cybermissions.objects;
 
+import net.zerotoil.cybermissions.CyberMissions;
 import net.zerotoil.cybermissions.utilities.FileUtils;
 
 import java.util.HashMap;
@@ -8,6 +9,7 @@ public class MissionObject {
 
     // ---- fields ----
 
+    private CyberMissions main;
     private String id;
     private String displayName;
     private String description;
@@ -16,20 +18,22 @@ public class MissionObject {
     private HashMap<String, String> rewards;
     private String startMessage;
     private String finishMessage;
+    private boolean enabled;
 
 
     // ---- constructors ----
 
     // default constructor
-    public MissionObject(String id, String displayName, String description, String difficulty) {
+    public MissionObject(CyberMissions main, String id, String displayName, String description, String difficulty) {
+        this.main = main;
         this.id = id;
         this.displayName = displayName;
         this.description = description;
         this.difficulty = difficulty;
         this.conditions = new HashMap<>();
         this.rewards = new HashMap<>();
-        this.startMessage = FileUtils.getMissionString(this.id + ".start-message");
-        this.finishMessage = FileUtils.getMissionString(this.id + ".finish-message");
+        this.startMessage = main.getFileUtils().getMissionString(this.id + ".start-message");
+        this.finishMessage = main.getFileUtils().getMissionString(this.id + ".finish-message");
     }
 
     public MissionObject(String id, String displayName, String description, HashMap<String, ConditionObject> conditions, HashMap<String, String> rewards) {
@@ -67,6 +71,10 @@ public class MissionObject {
         return this.rewards;
     }
 
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
 
     // ---- mutators ----
 
@@ -102,5 +110,7 @@ public class MissionObject {
         this.finishMessage = finishMessage;
     }
 
-
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }

@@ -1,0 +1,53 @@
+gui:
+  options:
+    # name of the menu
+    name: "&b&lCyber&f&lMissions"
+
+    # each row has 9 slots (max = 6)
+    rows: 3
+
+
+  gui-items:
+
+    1:
+      type: FILLER
+      item:
+        material: GRAY_STAINED_GLASS_PANE
+        amount: 1
+
+        name: "&7 "
+        lore: []
+
+    2:
+      type: MISSION
+
+      # if difficulty is enabled:
+      difficulty: "EASY"
+
+      # if you want specific missions:
+      mission: "ExampleMission"
+
+      slot: 11
+
+      # display item
+      in-progress:
+        material: DIRT
+        amount: 1
+
+        name: "&6&l{name}"
+        lore:
+          - "&e{description}"
+          - "&7Reward: &f{reward}"
+          - ""
+          - "&7Time Left: &c{time}"
+
+      completed:
+        material: BARRIER
+        amount: 1
+
+        name: "&6&l{name}"
+        lore:
+          - "&e{description}"
+          - "&7Reward: &f{reward}"
+          - ""
+          - "&7Time Left: &c{time}"

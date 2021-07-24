@@ -8,6 +8,9 @@ public class ConfigObject {
     private boolean autoStart;
     private boolean difficulty;
     private boolean duplicateMissions;
+    private boolean perPlayer;
+    private int maxMissions;
+
 
 
     // ---- constructors ----
@@ -35,6 +38,14 @@ public class ConfigObject {
         return this.duplicateMissions;
     }
 
+    public boolean isPerPlayer() {
+        return this.perPlayer;
+    }
+
+    public int getMaxMissions() {
+        return this.maxMissions;
+    }
+
     // ---- mutators ----
 
     public void setRandomMissions(boolean randomMissions) {
@@ -51,5 +62,13 @@ public class ConfigObject {
 
     public void setDuplicateMissions(boolean duplicateMissions) {
         this.duplicateMissions = duplicateMissions;
+    }
+
+    public void setPerPlayer(boolean perPlayer) {
+        this.perPlayer = perPlayer;
+    }
+
+    public void setMaxMissions (int maxMissions) {
+        this.maxMissions = maxMissions;
     }
 }
